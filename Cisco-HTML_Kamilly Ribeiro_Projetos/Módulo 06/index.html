@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <title>Descubra o Seu Mundo</title>
+    <link rel="icon" href="https://edube.org/uploads/media/default/0001/04/web-favicon.png" type="image/png">
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1> Descoberta Mundial  &#xF30D</h1>
+    <p>Clique no botão abaixo ou interaja com o mapa para descobrir informações obre cada continente.</p>
+    <button id="getLocation">Descobrir Localização</button>
+    <br>
+    <img id="mapa" src="./img/mapa-mundi.webp" alt="Mapa Mundi" usemap="#worldmap">
+    <map name="worldmap">
+        <area id="america-norte" shape="rect" coords="19,98,267,290" alt="América do Norte" title="América do Norte" href="javascript:void(0);">
+        <area id="america-sul" shape="rect" coords="123,291,267,464" alt="América do Sul" title="América do Sul" href="javascript:void(0);">
+        <area id="asia" shape="rect" coords="402,130,670,272" alt="Ásia" title="Ásia" href="javascript:void(0);">
+        <area id="oceania" shape="rect" coords="667,423,556,332" alt="Oceania" title="Oceania" href="javascript:void(0);">
+        <area id="europa" shape="rect" coords="400,129,299,232" alt="Europa" title="Europa" href="javascript:void(0);">
+        <area id="africa" shape="rect" coords="276,235,400,421" alt="África" title="África" href="javascript:void(0);">
+    </map>
+</body>
+</html>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const continenteInfo = {
+    'america-norte': {
+      continente: 'América do Norte',
+      rio: 'Rio Mississippi',
+      montanha: 'Denali',
+      pontosTuristicos: 'Grand Canyon, Estatúa da Liberdade, Cataratas do Niágara'
+    },
+    'america-sul': {
+      continente: 'América do Sul',
+      rio: 'Rio Amazonas',
+      montanha: 'Aconcágua',
+      pontosTuristicos: 'Machu Picchu, Ilhas Galápagos'
+    },
+    'europa': {
+      continente: 'Europa',
+      rio: 'Rio Danúbio',
+      montanha: 'Mont Blanc',
+      pontosTuristicos: 'Torre Eiffel, Coliseu, Acópole de Atenas'
+    },
+    'africa': {
+      continente: 'África',
+      rio: 'Rio Nilo',
+      montanha: 'Monte Kilimanjaro',
+      pontosTuristicos: 'Esfinje, Montanha da Mesa'
+    },
+    'asia': {
+      continente: 'Ásia',
+      rio: 'Rio Yangtzé',
+      montanha: 'Monte Everest',
+      pontosTuristicos: 'Grande Muralha da China, Petra'
+    },
+    'oceania': {
+      continente: 'Oceania',
+      rio: 'Rio Murray',
+      montanha: 'Monte Kosciuszko',
+      pontosTuristicos: 'Ópera de Sydney, Grande Barreira de Corais, Uluru'
+    }
+  };
+
+  function displayContinentInfo(continenteId) {
+    const info = continenteInfo[continenteId];
+    if (info) {
+      alert(`Continente: ${info.continente}\nRio: ${info.rio}\nMontanha: ${info.montanha}\nPontos Turísticos: ${info.pontosTuristicos}`);
+    } else {
+      alert('Informação não disponível');
+    }
+  }
+
+  document.querySelectorAll('area').forEach(area => {
+    area.addEventListener('click', function() {
+      const continenteId = this.id;
+      displayContinentInfo(continenteId);
+    });
+  });
+
+  const discoverLocationButton = document.getElementById('getLocation');
+  
+  discoverLocationButton.addEventListener('click', () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const continenteId = determineContinentByGeo(latitude, longitude);
+        if (continenteId) {
+          displayContinentInfo(continenteId);''
+        }
+      }, (error) => {
+        alert("Erro ao obter geolocalização: " + error.message);
+      });
+    } else {
+      alert("Geolocalização não é suportada no seu navegador.");
+    }
+  });
+
+  function determineContinentByGeo(latitude, longitude) {
+    if (latitude > 35 && longitude > -10 && longitude < 40) {
+      return 'europa';
+    } else if (latitude < 0 && longitude > -80 && longitude < -34) {
+      return 'america-sul';
+    } else if (latitude > 0 && longitude > -130 && longitude < -70) {
+      return 'america-norte';
+    } else if (latitude > 5 && latitude < 60 && longitude > 40 && longitude < 180) {
+      return 'asia';
+    } else if (latitude > -35 && latitude < 35 && longitude > 10 && longitude < 50) {
+      return 'africa';
+    } else if (latitude < -10 && longitude > 110 && longitude < 180) {
+      return 'oceania';
+    }
+    alert("Não foi possível determinar o continente baseada na sua localização.");
+    return null;
+  }
+});
+
+</script>

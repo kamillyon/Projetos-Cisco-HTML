@@ -1,0 +1,21 @@
+body {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(lightblue,rgb(59, 59, 136));
+    color: rgb(0, 0, 0);
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(30, 144, 255);
+}
+
+h2 {
+    color: darkblue;
+}
+
+#escola {
+    border-radius: 20px;
+    border: 3px rgb(63, 18, 167) solid;
+}

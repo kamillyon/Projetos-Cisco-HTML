@@ -1,0 +1,17 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(white, rgb(36, 131, 168));
+}
+
+div {
+    padding: 10px;
+}
+
+.banner {
+    width: 100%;
+}
+
+img {
+    border-radius: 20px;
+}

@@ -1,0 +1,14 @@
+body {
+    text-align: center;
+    background-image: url(https://images.unsplash.com/photo-1643757343290-b7073cd9c4a8?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGMlQzMlQTl1JTIwbnV2ZW5zJTIwcGxhbmFzfGVufDB8fDB8fHww);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    color: rgb(22, 46, 99);
+}
+
+#mapa {
+    border-radius: 15px;
+}
